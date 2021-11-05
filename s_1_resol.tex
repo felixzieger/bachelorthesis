@@ -1,0 +1,288 @@
+\subsection{Resolutions}
+We recall some basic definitions from homological algebra.
+\begin{definition}
+A module $P$ is projective if for all epimorphisms $\alpha: B \twoheadrightarrow C$ and every module homomorphism $\gamma: P \to C$ there is a homomorphism $\beta: P \to B$ such that $\alpha \beta = \gamma$.
+\end{definition}
+\begin{definition}
+A chain complex $X$ is a family $(X_n,\bdd{n})_{n\in \mathbb{Z}}$ of modules $X_n$ and homomorphisms $\bdd{n}:X_n\to X_{n-1}$ satisfying $\bdd{n}\bdd{n+1} = 0$ for all $n\in \mathbb{Z}$.
+\end{definition}
+\begin{definition}
+The homology $H(X)$ of a complex $X=(X_n,\bdd{n})$ is the family of modules $H_n(X):=\ker\bdd{n}/\Image \bdd{n+1}$.
+\end{definition}
+Let $C$ be a module, $X = (X_n, \bdd{n})$ a chain complex, trivial in negative degrees, and $\epsilon:X_0 \rightarrow C$ a module homomorphism with $\epsilon \bdd{1}=0$.
+The pair $(X,\epsilon)$ is called a complex over $C$.
+If $X$ has trivial homology $H_n(X)$ for every $n>0$ and $\bdd{1}X_1 = \ker \epsilon$, then $(X,\epsilon)$ is called a resolution of $C$.
+%free and projective resolution and complex over C
+%If all $X_n$ are free modules then $(X,\epsilon)$ is called free.
+If all $X_n$ are projective modules, then $(X,\epsilon)$ is called projective.
+%Similarly $(X,\epsilon)$ is called projective if all $X_n$ are projective.
+\begin{definition}
+Let $X = (X_n, \bdd{n})$ and $X'=(X'_n, \bdd{n}')$ be chain complexes. A chain transformation $f:X\to X'$ is a family of module homomorphisms $f_n: X_n \to X_n'$ satisfying $\bdd{n}'f_n = f_{n-1}\bdd{n}$ for all $n\in \mathbb{Z}$.
+\end{definition}
+\begin{theorem}\cite[Theorem II.6.1.]{maclane}
+\label{thm:comparison}
+Let $C$ and $C'$ be modules.
+Given a projective complex $(X,\epsilon)$ over $C$, a resolution $(X',\epsilon')$ of $C'$ and a module homomorphism $\gamma: C\to C'$ there is a chain transformation $f:X\to X'$ lifting $\gamma$.
+That is, there are homomorphisms $f_0, f_1, \dots$ such that the diagram
+\[
+\begin{tikzcd}
+ \dots \arrow{r}& 
+ X_2 \arrow{r}{\bdd{2}} \arrow[dotted]{d}{f_2}&
+ X_1 \arrow{r}{\bdd{1}} \arrow[dotted]{d}{f_1}&
+ X_0 \arrow{r}{\epsilon} \arrow[dotted]{d}{f_0}& 
+ C \arrow{d}{\gamma} \\
+ \dots \arrow{r} &
+ X_2' \arrow{r}{\bdd{2}'} &
+ X_1' \arrow{r}{\bdd{1}'} &
+ X_0' \arrow[two heads]{r}{\epsilon'} &
+ C'
+\end{tikzcd}
+\]
+commutes.
+\end{theorem}
+\begin{proof}
+%Edge case f_0
+Because $X_0$ is projective and $\epsilon': X'_0 \to C'$ is surjective there is a map $f_0:X_0\to X'_0$ with $\epsilon' f_0 = \gamma \epsilon$.
+%Induction step
+Suppose we constructed maps $f_0, \dots, f_n$.
+Because $\bdd{n}\bdd{n+1} = 0$ and $f_{n-1}\bdd{n}= \bdd{n}'f_n$ we have $0 = f_{n-1}\bdd{n}\bdd{n+1} = \bdd{n}'f_n\bdd{n+1}$.
+Hence $f_n \bdd{n+1}X_{n+1} \subset \ker\bdd{n}' = \bdd{n+1}'X_{n+1}'$ by exactness at $X_{n}'$.
+As $X_{n+1}$ is projective there is a map $f_{n+1}$ with $\bdd{n+1}' f_{n+1} = f_n \bdd{n+1}$.
+\end{proof}
+\begin{definition}
+Let $f,f':X\to X'$ be chain transformations.
+A chain homotopy $s$ between $f$ and $f'$ is a familiy of maps $s_n:X_n\to X_{n+1}'$ satisfying $f_n - f'_n = s_{n-1}\bdd{n} + \bdd{n+1}'s_n$ for all $n \in \mathbb{Z}$.
+\end{definition}
+\begin{lemma}
+\label{lemma:comparison}
+Under the assumptions of Theorem \ref{thm:comparison}, two chain transformations $f,f'$ lifting the same $\gamma$ are chain homotopic.
+\end{lemma}
+\begin{proof}
+For convenience we use the same symbol $\bdd{}$ for all boundary maps $\bdd{n}$ and $\bdd{n}'$.
+We want to construct maps $s_n : X_n \to X'_{n+1}$ satisfying
+\begin{equation}
+\label{eq:homotopyatzero}
+f_0 - f'_0 = \bdd{} s_0
+\end{equation}
+\begin{equation}
+\label{eq:homotopyatnplusone}
+f_{n+1} - f'_{n+1} = \bdd{} s_{n+1} + s_n \bdd{}
+\end{equation}
+for $n\geq 0$.
+%Deal with edge case t, s_0
+We observe that by commutativity $\epsilon'(f_0 - f'_0)=0$.
+By exactness of the bottom row we know $(f_0 - f'_0)X_0 \subset \bdd{} X'_1$.
+Projectivity of $X_0$ gives us a map $s_0:X_0 \to X'_1$ satisfying \eqref{eq:homotopyatzero}.
+%Induction step
+Suppose we have maps $s_0,\dots,s_n$ satisfying \eqref{eq:homotopyatzero} and \eqref{eq:homotopyatnplusone}.
+Then 
+$\bdd{} s_n = f_n - f'_n - s_{n-1} \bdd{}$
+and therefore
+$\bdd{}(f_{n+1} - f'_{n+1} - s_n \bdd{}) = ( f_n - f'_n )\bdd{} - (f_n - f'_n -s_{n-1}\bdd{})\bdd{} = 0$.
+Exactness of the bottom row implies 
+$(f_{n+1} - f'_{n+1} - s_n \bdd{})X_{n+1} \subset \bdd{} X'_{n+2}$.
+Finally, because $X_{n+1}$ is projective, we get a map 
+$s_{n+1}: X_{n+1} \to X'_{n+2}$
+satisfying
+$\bdd{} s_{n+1} = f_{n+1} - f'_{n+1} - s_n\bdd{}$.
+\end{proof}
+\subsection{Ext$^\text{n}$ and Resolutions}
+\label{ss:extnandresolutions}
+We have to recall some more definitions.
+\begin{definition}
+Let $G$ be a module and $X=(X_n,\bdd{n})$ a complex.
+The cohomology $H^*(X,G)$ of $X$ with coefficients in $G$ is defined as the homology of the complex $\Hom(X,G)$.
+An element of $\Hom(X_n,G)$ is called $n$-cochain.
+The coboundary for an $n$-cochain $f$ is defined by $\delta^n f = (-1)^{n+1}f\bdd{n+1}$.
+An element of $\ker \delta^n$ is called $n$-cocycle.
+Two $n$-cocycles are cohomologous if their difference is the coboundary of an ($n$-1)-cochain.
+\end{definition}
+
+For $n>0$ the groups $\Ext{n}(C,A)$ can be computed as cohomology groups $H^{n}(X,A)$ of a projective resolution of $C$.
+
+Regard an $n$-fold extension $S$ of $A$ by $C$ as a resolution of $C$ with zeros beyond the $n$th term.
+By Theorem \ref{thm:comparison} we can lift the identity $1_C$ to a chain transformation $g:X\to S$:
+\[
+\begin{tikzcd}
+X_{n+1} \arrow{r}{\bdd{n+1}} & 
+X_n \arrow{r}{\bdd{n}} \arrow[dotted]{d}{g_n} & 
+X_{n-1}\arrow{r} \arrow[dotted]{d}{g_{n-1}}&
+\dots \arrow{r} & 
+X_0 \arrow{r} \arrow[dotted]{d}{g_{0}}& 
+C \arrow[d,equal]
+\\
+0 \arrow{r} &
+A \arrow{r} & 
+B_{n-1} \arrow{r} &
+\dots \arrow{r} &
+B_0 \arrow{r} &
+C
+\end{tikzcd}
+\]
+Note that by commutativity $g_n \bdd{n+1} = 0$.
+This means that $g_n$ is a cocycle.
+Define a map $\zeta: \Ext{n}(C,A) \to H^{n}(X,A)$ by $\zeta( \cls(S)) := \cls(g_n)$, where $\cls$ assigns a congruence class to an extension (or a cohomology class in the case of a cocycle) to the respective element.
+Now we show that $\zeta$ is well defined.
+\begin{enumerate}
+\item \label{chainhomotopicyieldscohomologous elements}
+We need to show that any two chain transformations lifting $1_C$ yield cohomologous elements.
+Suppose $g':X\to S$ is a seconds chain transformation lifting $1_C$.
+Let $s$ denote a chain homotopy between $g$ and $g'$ given by Lemma \ref{lemma:comparison}.
+Note that $s_n: X_n \to 0$ is zero.
+The chain homotopy there gives $g_n-g'_n= s_{n-1} \bdd{n}$, so $g_n$ and $g'_n$ are cohomologous.
+\item
+We need to prove that the class of $g_n$ does not depend on the representative of $\cls(S)$.
+By our definition of congruence of $n$-fold exact sequences it is sufficient to check two cases.
+
+First case.
+Suppose $\Gamma: S\to S'$ is a morphism that starts with $1_A$  and ends with $1_C$.
+Then $(\Gamma g)_n = g_n$ and $\Gamma g$ is a chain transformation.
+
+Second case.
+Suppose $\Gamma: S'' \to S$ is a morphism that starts with $1_A$ and ends with $1_C$. 
+Now we construct a chain transformation $f: X \to S''$ lifting $1_C$ as in Theorem \ref{thm:zeta}.
+Then $\Gamma f$ and $g$ are chain transformations lifting $1_C$.
+We saw in \ref{chainhomotopicyieldscohomologous elements} that they therefore yield cohomologous elements $f_n$ and $g_n$.
+\end{enumerate}
+\begin{theorem}\cite[Theorem III.6.4.]{maclane}
+\label{thm:zeta}
+Let $A$, $C$ be modules and
+$(X,\epsilon)$
+be a projective resolution of $C$.
+Then the map
+$
+\zeta: \Ext{n}(C,A) \to H^{n}(X,A)
+$
+is an isomorphism for $n$>0.
+$\zeta$ is natural in $A$.
+\end{theorem}
+\begin{proof}
+The function $\eta$ defined below will be the inverse of $\zeta$.
+We factor $\bdd{n}:X_n \to X_{n-1}$ as $(\bdd{}',\chi): X_n \to \bdd{n}X_n \to X_{n-1}$ with $\chi$ the inclusion.
+Let $g: X_n \to A$ be an $n$-cocyle, i.e. $g \bdd{n+1} = 0$.
+Because $\ker (\bdd{}') = \ker(\bdd{n}) = \bdd{n+1}X_{n+1} \subset ker(g)$ we can factor $g$ as $h\bdd{}'$ by the universal property of the quotient.
+\begin{equation*}
+\begin{tikzcd}
+&
+X_{n+1} \arrow{r}&
+X_n \arrow{d}{\bdd{}'} \arrow{rd}{\bdd{n}}
+\\
+S_n:&
+0 \arrow{r} &
+\bdd{}X_n\arrow{r}{\chi} \arrow{d}{h}&
+X_{n-1} \arrow{r} \arrow{d}&
+\dots \arrow{r}&
+%X_0 \arrow{r}&
+C \arrow[d,equal]
+\\
+hS_n:&
+0 \arrow{r}&
+A \arrow{r}
+&
+B_{n-1} \arrow{r}&
+\dots \arrow{r}&
+%&
+C
+\end{tikzcd}
+\end{equation*}
+In the above diagram from \cite[p. 89]{maclane} $S_n$ is an $n$-fold exact sequence and $hS_n$ is the push out along $h$.
+We define $\eta:H^n(X,A)\to \Ext{n}(C,A)$ by $\eta \cls(g) := \cls(hS_n)$.
+Using the distributive law in $\Ext{}$ we show that $\eta$ is well defined.
+Consider a coboundary $h\bdd{}'$ with $\delta k = h\bdd{}'$ for some $k:X_{n-1}\to A$.
+By definition of the coboundary
+$\delta k = (-1)^n k \bdd{} = (-1)^n k \chi\bdd{}'$.
+Therefore $h = (-1)^n k \chi$ and $h S_n = ((-1)^n k \chi)S_n$.
+By Lemma \ref{lemma:nfoldcomposite} the composite extension $\chi S_n$ is congruent to $ S_0$ as defined in \eqref{nfoldsplitextension}.
+Because $S_0$ is the zero element of addition in $\Ext{n}$ the distributive law implies that cohomologous elements are assigned the same element.
+This shows that $\eta$ is well defined.
+Now we show that the maps are inverses of each other.
+
+%$\eta\zeta = 1$
+Let $S\in\in \Ext{n}(C,A)$ be an extension and $g:X \to S$ a chain transformation lifting $1_C$.
+Denote the factorization of $g_n$ by  $h \bdd{}'$.
+Notice that $(h, g_{n-1},\dots,g_0,1_C):S_n \to S$ is a morphism.
+Lemma \ref{lemma:morphisminducescongruence_n} implies $hS_n \equiv S$.
+This shows $\eta\zeta = 1$.
+
+%$\zeta\eta = 1$
+Consider a cocycle $g:X_n \to A$ with factorization $g = \bdd{}'h$. 
+Constructing the sequence $hS_n$ yields a chain transformation $X \to hS_n$ via composition of $X\to S_n \to hS_n$.
+The $n$th homomorphism of this chain transformation is exactly $g$.
+Therefore $\zeta\eta = 1$.
+
+%Proof $\zeta$ is natural in $A$
+It still remains to prove that $\zeta$ is natural.
+Let $\alpha: A \to A'$ be a module homomorphism.
+We need to show that the diagram
+\begin{equation*}
+\label{diag:zetanatural}
+\begin{tikzcd}
+\Ext{n}(C,\_)(A) 
+	\arrow{r}{\zeta} 
+	\arrow{d}{\alpha_*}&
+H^n(X,\_)(A)
+	\arrow{d}{\alpha_*}
+\\
+\Ext{n}(C,\_)(A') 
+	\arrow{r}{\zeta} &
+H^n(X,\_)(A')
+\end{tikzcd}
+\end{equation*}
+commutes.
+
+Suppose $S\in \in \Ext{n}(C,A)$.
+
+Let $g: X \to S$ be a chain transformation lifting $1_C$.
+Then $\alpha_* \zeta \cls(S) = \cls(\alpha g_n)$.
+
+Let $h: X \to \alpha S$ be a chain transformation lifting $1_C$.
+Then $\zeta \alpha_* \cls (S) = \zeta \cls(\alpha S) = \cls(h_n)$.
+
+By definition of $ \alpha S$ we have a morphism 
+$\Gamma: S \to \alpha S$.
+The composition $\Gamma g : X \to \alpha S$ also lifts $1_C$.
+Thus $\Gamma g$ and $h$ are chain homotopic by Lemma \ref{lemma:comparison}, so $\cls(h_n) = cls((\Gamma g)_n) = cls(\alpha g_n)$.
+\end{proof}
+Theorem \ref{thm:zeta} is a useful tool for computing Ext groups.
+\begin{application}
+Let $A$ be an abelian group and $n,m$ positive integers.
+Then 
+\[\Ext{m}_{\mathbb{Z}}(\mathbb{Z}/n,A) \cong \begin{cases}
+A/nA, & m = 1\\
+0, & m\geq 2
+\end{cases}\]
+\end{application}
+\begin{proof}
+Let $\rho: \mathbb{Z} \to \mathbb{Z}/n$ be the projection.
+Consider the exact sequence
+\[
+\begin{tikzcd}
+(X,\rho): &
+\dots \arrow{r}&
+0 \arrow{r} &
+0 \arrow{r} &
+\mathbb{Z} \arrow{r}{\cdot n} &
+\mathbb{Z} \arrow{r}{\rho} &
+\mathbb{Z}/n \arrow{r} &
+0.
+\end{tikzcd}
+\]
+Because $\mathbb{Z}$ is a projective module over itself, the pair $(X,\rho)$ is a projective resolution of $\mathbb{Z}/n$.
+Theorem \ref{thm:zeta} implies $\Ext{m}(\mathbb{Z}/n,A) \cong H^{m}(X,A)$ for $m >0$.
+Denote the induced maps on $\Hom$-groups by $n_*$ and $p_*$.
+We calculate
+\[
+\Image n_* = \left\{nf:\mathbb{Z}\to A|f\in \Hom(\mathbb{Z},A)\right\} \cong \left\{na|a\in A\right\} =: nA.
+\]
+This gives us
+\begin{align*}
+\Ext{1}(\mathbb{Z}/n,A) \cong \ker (\Hom(X_1,A) \to 0) / \Image n_* = A / nA
+\end{align*}
+and clearly the cohomology groups $H^m(X,A)$ are trivial for $m>2$.
+\end{proof}
+From here on we will denote $\Hom(C,A)$ by $\Ext{0}(C,A)$.
+Given a resolution $\dots \to X_1 \to X_0 \xrightarrow{\epsilon} C \to 0$, the induced sequence
+$\Hom(X_1,A) \leftarrow \Hom(X_0,A) \xleftarrow{\epsilon^*} \Hom(C,A) \leftarrow 0$
+is exact \cite[Theorem II.6.1.]{maclane}.
+Hence $\ker (\Hom(X_0,A)\to \Hom(X_1,A)) \cong \Image \epsilon^*$ and therefore $\epsilon^*: \Hom(C,A) = \Ext{0}(C,A) \cong H^0(X,A)$.
+For convenience we will denote this isomorphism by $\zeta$.

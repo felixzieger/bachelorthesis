@@ -1,0 +1,222 @@
+\subsection{A Long Exact Sequence for Ext$^\text{n}$}
+\label{ss:alongexactsequenceforextn}
+%In our proof we will use a chain complex of free modules.:
+\begin{definition}
+A module $F$ is called free if it has a basis.
+\end{definition}
+\begin{lemma}
+Every free module is projective.
+\end{lemma}
+\begin{proof}
+Let $F$ be free with basis $T \subset F$.
+Given an epimorphism $\alpha: B \twoheadrightarrow C$ and a homomorphism $\gamma: F \to C$, we can choose elements $b_t \in B$ with $\alpha b_t = \gamma t$ for each $t\in T$.
+This defines a homomorphism $\beta: F \to B$ satisfying $\alpha\beta=\gamma$.
+\end{proof}
+In the main proof of this subsection we will use some notation of
+\begin{theorem}\cite[Theorem II.4.5.]{maclane}
+\label{thm:longcohomologysequence}
+If $X$ is a projective complex of $R$-modules and if 
+$E=(\chi,\sigma): 0 \to A \to B \to C \to 0$
+is a short exact sequence of $R$-modules, there is a connecting homomorphism 
+$\delta_E:H^n(X,C)\to H^{n+1}(X,A)$.
+Explicitly $\delta_E$ is defined by
+$\delta_E = \cls \chi^{-1}\delta\sigma^{-1}\cls^{-1}$ where $\delta$ is the coboundary.
+The connecting homomorphism yields a long exact sequence
+\[
+\dots \to
+H^n(K,A)\xrightarrow{\chi_*}
+H^n(K,B)\xrightarrow{\sigma_*}
+H^n(K,C) \xrightarrow{\delta_E}
+H^{n+1}(K,A)\to
+\dots.
+\]
+The maps $\chi_*$ and $\sigma_*$ are the induced maps on cohomology classes.
+\end{theorem}
+\begin{proof}
+See \cite[Theorem II.4.5.]{maclane}.
+\end{proof}
+\begin{definition}
+Given a short exact sequence $E$ from $A$ to $C$ we define the connecting homomorphisms
+$E_*:\Ext{n}(G,C) \rightarrow \Ext{n+1}(G,A)$ for each $n\geq0$ by $E_*(cls(S)) := cls(E\circ S)$.
+\end{definition}
+To see that $E*$ is well defined, suppose we have representatives $S$ and $S'$ of an element $\sigma\in\Ext{n}(G,C)$.
+By definition of congruence we have morphisms 
+\[S \to S_1 \leftarrow S_2 \to \dots \to S_{2k-1} \leftarrow S'\]
+all starting in $1_C$ and ending in $1_G$.
+We use this sequence to construct morphisms
+\[E\circ S \to E\circ S_1 \leftarrow E\circ  S_2 \to \dots \to E\circ  S_{2k-1} \leftarrow E\circ  S'\]
+by filling up the missing module homomorphisms with identities.
+
+We use the notation $E_*\tau = E\tau$ for  $\tau\in \Ext{n}(G,C)$.
+We can regard $\Ext{n}(G)(E):=\Ext{n}(G,C)$ and $\Ext{n+1}(G)(E):=\Ext{n+1}(G,A)$ as covariant functors of $E$.
+Then the connecting homomorphism is a natural transformation between $\Ext{n}(G)(\_)$ and $\Ext{n+1}(G)(\_)$ \cite[p. 97]{maclane}.
+
+\begin{theorem}\cite[Theorem III.9.1.]{maclane}
+Consider a short exact sequence $E = (\chi,\sigma): 0 \to A \to B \to C \to 0$ of $R$-modules and an $R$-module $G$.
+Then
+\[
+\dots\to
+\Ext{n}(G,A) \xrightarrow{\chi_*}
+\Ext{n}(G,B) \xrightarrow{\sigma_*}
+\Ext{n}(G,C) \xrightarrow{E_*}
+\Ext{n+1}(G,A) 
+\to\dots
+\]
+is exact.
+It starts with $0\rightarrow \Ext{0}(G,A)$.
+The maps involved are defined as
+\begin{equation}
+\label{eq:longexactexthomomorphisms}
+\chi_*\rho = \chi \rho, \quad 
+\sigma_*\omega = \sigma \omega, \quad
+E_* \tau = E \tau
+\end{equation}
+for elements 
+$\rho\in\Ext{n}(G,A)$,
+$\omega\in\Ext{n}(G,B)$ 
+and 
+$\tau\in\Ext{n}(G,C)$.
+\end{theorem}
+\begin{proof}
+Because every module is isomorphic to a quotient of a free module \cite[Proposition I.5.3.]{maclane} we can construct free resolutions for any module.\footnote{Suppose we have a module $A\cong F_0/G_0$ for $F_0$ free. Then $G_0\cong F_1/G_1$ with $F_1$ free and so on. Then $\dots \to F_1\to F_0 \to A \to 0$ is a free resolution of $A$.}
+Let $X$ be a free resolution of $G$.
+Theorems \ref{thm:zeta} and \ref{thm:longcohomologysequence} yield a long exact sequence for $\Ext{}$:
+\begin{equation}
+\begin{tikzcd}
+\label{diag:longexactsequenceisoms}
+%\dots\to %leave out dots to make diagram fit on page
+\Ext{n}(G,A) \arrow{r}{\chi_*} \arrow{d}{\zeta}&
+\Ext{n}(G,B) \arrow{r}{\sigma_*} \arrow{d}{\zeta}&
+\Ext{n}(G,C) \arrow{r}{E_*} \arrow{d}{\zeta}&
+\Ext{n+1}(G,A) \arrow{d}{\zeta}
+%\to\dots 
+\\
+%\dots\to
+H^{n}(X,A) \arrow{r}{\chi_*} &
+H^{n}(X,B) \arrow{r}{\sigma_*} &
+H^{n}(X,C) \arrow{r}{(-1)^{n+1}\delta_E} &
+H^{n+1}(X,A) 
+%\to\dots
+\end{tikzcd}
+\end{equation}
+It suffices to check that the maps defined in \eqref{eq:longexactexthomomorphisms} make the diagram commutative for every $n \geq 0$.
+Commutativity of the first two squares of \eqref{diag:longexactsequenceisoms} follows by naturality of $\zeta$ for $n > 0$ and by recalling the definition of the isomorphism for $n=0$.
+
+To prove commutativity of the square on the right in \eqref{diag:longexactsequenceisoms} in the case $n=0$, we have to show that
+$(-1)\delta_E \zeta = \zeta E_*$.
+Let $\gamma:G \to C$ be a homomorphism and $(1_A,\beta,\gamma):E\gamma\to E$ a morphism.
+The diagram 
+\begin{equation*}
+\begin{tikzcd}
+X:\arrow{d}&
+X_1 
+	\arrow{r}{\bdd{}}
+	\arrow{d}{f_1} &
+X_0 
+	\arrow{r}{\epsilon}
+	\arrow{d}{f_0} &
+G
+	\arrow[equal]{d} 
+\\
+E\gamma:\arrow{d}&
+A
+	\arrow{r} 
+	\arrow[equal]{d} &
+B'
+	\arrow{r} 
+	\arrow{d}{\beta}&
+G
+	\arrow{d}{\gamma}
+\\
+E:&
+A
+	\arrow{r}{\chi} &
+B
+	\arrow{r}{\sigma} &
+C
+\end{tikzcd}
+\end{equation*}
+shows chain transformations $X\to E\gamma \to E$.
+By definition of $\delta_E$ and commutativity
+\begin{multline*}
+\delta_E \zeta \gamma 
+= \delta_E \cls(\gamma \epsilon)
+= \cls \chi^{-1} \delta \sigma ^{-1} \gamma \epsilon
+\\= \cls \chi^{-1} \delta (\beta f_0)
+= (-1) \cls \chi^{-1} \beta f_0 \bdd{}
+= (-1) \cls (f_1).
+\end{multline*}
+On the other hand $\zeta E_* \gamma = \zeta \cls(E\gamma) = cls(f_1)$.
+Thus the case is proven.
+
+%commutativity of square with $\delta_E$
+Let $S \in\in \Ext{n}(G,C)$ for $n>0$.
+Regard $E \circ S$ as a resolution of $G$.
+Let $f:X\to E\circ S$ be a chain transformation lifting $1_G$.
+The diagram
+\begin{equation*}
+%\label{diag:longexactsequenceproof}
+\begin{tikzcd}
+X: \arrow{d}{f}&
+X_{n+1}
+	\arrow{r}{\bdd{n+1}}
+	\arrow{d}{f_{n+1}}&
+X_{n}
+	\arrow{r}
+	\arrow{d}{f_n}&
+X_{n-1}
+	\arrow{r}
+	\arrow{d}{f_{n-1}}&
+\dots
+	\arrow{r}&
+X_0
+	\arrow{r}
+	\arrow{d}{f_0}&
+G
+	\arrow[d, equal]
+\\
+E\circ S:\arrow{d}{\Gamma}&
+A
+	\arrow{r}{\chi}&
+B
+	\arrow{r}{\lambda\sigma}
+	\arrow{d}{\sigma}&
+B_{n-1}
+	\arrow{r}
+	\arrow[d,equal]&
+\dots
+	\arrow{r}&
+B_0
+	\arrow{r}
+	\arrow[d,equal]&
+G
+	\arrow[d, equal]
+\\
+S:&
+&
+C
+	\arrow{r}{\lambda}&
+B_{n-1}
+	\arrow{r}&
+\dots
+	\arrow{r}&
+B_0
+	\arrow{r}&
+G
+\end{tikzcd}
+\end{equation*}
+shows chain transformations $X\to E\circ S\to S$.
+%%%
+%%% \zeta E_*
+%%%
+By definition of $\zeta$ we get $\zeta E_* \cls(S) = \cls(f_{n+1})$.
+%%%
+%%% \delta_E \zeta
+%%%
+Composing $\Gamma f$ results in a chain transformation $X \to S$ lifting $1_G$.
+Therefore $\zeta(S) = \cls((\Gamma f)_n) = \cls(\sigma f_n)$.
+Hence $\delta_E \zeta(S)= \cls \chi^{-1}\delta f_n = (-1)^{n+1} \cls \chi^{-1} f_n \bdd{n+1} = (-1)^{n+1} \cls (f_{n+1})$.
+The last equation follows by commutativity of the upper left square in the diagram.
+Signs cancel out with those in our exact sequence \eqref{diag:longexactsequenceisoms}.
+This shows commutativity for $n>0$.
+\end{proof}

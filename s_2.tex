@@ -1,0 +1,127 @@
+\section{Extensions and Cohomology of Groups}
+\label{s:extensionsandcohomologyofgroups}
+Let $G, B, \Pi$ be groups.
+An exact sequence 
+\begin{equation} 
+\label{diag:groupextension} 
+\begin{tikzcd}
+E: 0 \arrow{r}& G \arrow{r}{\chi} & B \arrow{r}{\sigma} &\Pi \arrow{r}& 1
+\end{tikzcd}
+\end{equation}
+is called a group extension of $G$ by $\Pi$.
+For convenience $G,B$ are denoted as additive groups and $\Pi$ as a multiplicative group.
+We define a homomorphism 
+$\theta:B \to \Aut(G)$ 
+via conjugation
+\[
+\chi (\theta(b)g) = b + \chi g - b 
+\]
+for $b\in B$ and $g\in G$.
+Let $A:=G$ be an abelian group.
+Then for any $b\in \ker \sigma$ by exactness $b=\chi a$ for some $a\in A$, hence $\theta(b) = 1_{A}$.
+Therefore $\ker \sigma \subset \ker \theta$.
+Thus we can define
+$\phi : \Pi \to \ Aut(A)$ via the universal property of the quotient as the unique map such that $\phi\sigma = \theta$.
+Call $\phi$ the operators of the extension $E$.
+We have the following equality
+\begin{equation}
+\label{eq:operatorsphi}
+\chi (\phi(\sigma(b))a) = b + \chi a - b
+\end{equation}
+for $a\in A$ and $b\in B$.
+% Define Morphism $\Gamma: E \to E'$ via commutative diagram.
+A morphism $\Gamma: E \to E'$ is a tuple of group homomorphisms $(\alpha,\beta,\gamma)$ such that the diagram
+\begin{equation*}
+%\label{diag:group_extension_morphism}
+\begin{tikzcd}
+E: \arrow{d}{\Gamma}&
+A\arrow{r}\arrow{d}{\alpha}&
+B \arrow{r}\arrow{d}{\beta}&
+\Pi \arrow{d}{\gamma}
+\\
+E': &
+A'\arrow{r} &
+B'\arrow{r} &
+\Pi'
+\end{tikzcd}
+\end{equation*}
+commutes.
+% Define congruence $E \equiv E'$ via morphism $(1_A,\beta,1_{\Pi})$
+% Note that congruent extennsions have the same operators.
+Two group extensions $E, E'$ are congruent if there is a morphism of the form $(1_A,\beta,1_{\Pi}):E \to E'$.
+We use the familiar notation $E\equiv E'$ for congruent extensions.
+As in the case of $\Ext{}$ we may speak of congruence classes of group extensions because $\beta$ is an isomorphism via the Short 5 Lemma.
+\begin{lemma}
+Congruent extensions have the same operators.
+\end{lemma}
+\begin{proof}
+Consider extensions $E=(\chi,\sigma):A\to B\to \Pi$ with operators $\phi$ and $E'=(\chi',\sigma'):A\to B'\to \Pi$ with operators $\phi'$.
+Assume $E$ and $E'$ are congruent, so there is a morphism $(1_A,\beta,1_{\Pi}):E \to E'$.
+Let $b\in B$ and set $\sigma b = x$.
+By commutativity $\sigma' \beta b = \sigma b = x$ and $\beta \chi = \chi'$.
+By the definition of operators for $a\in A$ we have
+\begin{align*}
+\beta \chi (\phi(\sigma b)a) &= \beta b + \beta \chi a - \beta b \\
+\Longrightarrow \; \beta \chi (\phi(x)a) &= \chi' (\phi'(\sigma' \beta b)a)\\
+\Longrightarrow \;\;\, \chi' (\phi(x)a) &= \chi' (\phi'(x)a).
+\end{align*}
+Because $\chi'$ is injective the operators $\phi$ and $\phi'$ are equal.
+\end{proof}
+Denote the set of congruence classes of  group extensions of an abelian group $A$ by any group $\Pi$ with operators $\phi$ by $\Opext(\Pi,A,\phi)$.
+\subsection{Group Ring}
+In this subsection we follow \cite[Chapter 3.2.]{milies}.
+Let $\Pi$ be any multiplicative group.
+Let $\mathbb{Z}(\Pi)$ denote the set of all formal linear combinations
+$\alpha = \sum_{x\in\Pi} a_x x$ where $a_x \in \mathbb{Z}$ with $a_x = 0$ for all but finitely many $x$.
+We define the sum of two elements in $\mathbb{Z}(\Pi)$ by
+\[
+\left(\sum_{x\in\Pi} a_x x\right) + \left(\sum_{y\in\Pi} b_y y\right) = \sum_{x\in\Pi} (a_x + b_x) x.
+\]
+We define the product of two elements $\alpha=\sum_{x\in\Pi} a_x x$ and $\beta= \sum_{y\in\Pi} b_y y$ by
+\[
+\alpha\beta = \sum_{x,y\in\Pi} (a_x b_y) xy.
+\]
+These operations induce a ring structure on $\mathbb{Z}(\Pi)$.
+A module over $\mathbb{Z}(\Pi)$ is called $\Pi$-module.
+We want to show that a group homomorphism $\Pi\to Aut(A)$ for an abelian group $A$ defines a unique $\Pi$-module structure on $A$.
+
+Define an embedding $\iota:\Pi \to \mathbb{Z}(\Pi)$ by $\iota(x)=1 \cdot x$.
+Note that $\iota\Pi$ is a basis of $\mathbb{Z}(\Pi)$.
+
+\begin{lemma}\cite[Proposition IV.1.1.]{maclane}
+\label{lemma:universalproperty_groupring}
+Let $\mu:\Pi \to R$ be a function with $\mu(1)=1$ and $\mu(xy)=\mu(x)\mu(y)$.
+There is a unique ring homomorphism $\rho:\mathbb{Z}(\Pi)\to R$ such that the diagram
+\[
+\begin{tikzcd}
+& \mathbb{Z}(\Pi) 
+	\arrow{d}{\rho}
+\\
+\Pi 
+	\arrow{ur}{\iota}
+	\arrow{r}{\mu}
+& R
+\end{tikzcd}
+\]
+commutes.
+\end{lemma}
+\begin{proof}
+Define $\rho(\sum_{x\in\Pi}a_x x):= \sum_{x\in\Pi}a_x \mu(x)$.
+It is easy to check that this is a ring homomorphism and that the diagram commutes.
+Since $\iota\Pi$ is a basis, $\rho$ is unique.
+\end{proof}
+
+\begin{lemma} \cite[Proposition IV.1.2.]{maclane}
+Let $A$ be an abelian group.
+A group homomorphism $\phi: \Pi \to Aut(A)$ gives $A$ a unique $\Pi$-module structure. 
+\end{lemma}
+\begin{proof}
+The group homomorphisms $A \to A$ form a ring $End(A)$.
+The automorphisms $Aut(A)$ are a subset of $End(A)$.
+Extending the range of $\phi$ to $End(A)$ allows us to apply Lemma \ref{lemma:universalproperty_groupring}.
+Hence $\phi$ induces a $\Pi$-module structure on $A$.
+We say $A$ is a $\Pi$-module with operators $\phi$.
+\end{proof}
+%--------------------------
+\input{ss_2_1}
+\input{ss_2_2}

@@ -1,0 +1,18 @@
+\documentclass[11pt, a4paper, german]{article} 
+%TODO check if 'german' does belong here
+
+\usepackage{mystyle}
+
+\begin{document}
+\begin{otherlanguage}{german} %Needed for german date format
+\maketitle
+\end{otherlanguage}
+%\clearpage
+\tableofcontents %TODO check if "contents" or "Inhaltsverzeichnis" is shown
+\clearpage
+\include{zsmmnfssng}
+\input{intro}
+\input{s_1}
+\input{s_2}
+\printbibliography
+\end{document}

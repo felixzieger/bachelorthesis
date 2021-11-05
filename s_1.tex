@@ -1,0 +1,308 @@
+\section{Extensions and Resolutions}
+\label{s:extensionsandresolutions}
+Throughout this thesis $R$ will denote a ring with identity.
+We only consider left modules over rings.
+If not stated otherwise, all modules are $R$-modules and all module homomorphisms are $R$-module homomorphisms.
+The notation for an identity map of a set $X$ into itself is $1_X$.
+Image and kernel of a map $\alpha$ are denoted $\Image \alpha$ and $\ker \alpha$ respectively.
+\subsection{Ext}
+\label{ss:ext1}
+Let $A$ and $C$ be $R$-modules.
+An extension $E$ of $A$ by $C$ is a short exact sequence
+\begin{equation}
+\label{shortexactsequence}
+\begin{tikzcd} 
+E: 0 \arrow{r} & A \arrow{r}{\chi} & B \arrow{r}{\sigma} & C \arrow{r}& 0
+\end{tikzcd}
+\end{equation}
+of $R$-modules.
+When speaking of extensions we always mean the associated modules and homomorphisms.
+We write $E=(\chi,\sigma)$ for a sequence \eqref{shortexactsequence}.
+A morphism $\Gamma$ from $E$ to $E'$ is a triple of module homomorphisms $(\alpha,\beta,\gamma)$ such that the diagram
+\[ 
+\begin{tikzcd}
+E \arrow{d}{\Gamma}:& A \arrow{r} \arrow{d}{\alpha} & B \arrow{r} \arrow{d}{\beta} & C \arrow{d}{\gamma} \\
+E': & A' \arrow{r} & B' \arrow{r} & C'
+\end{tikzcd} 
+\]
+commutes.
+For a morphism of the form 
+\begin{equation} 
+\label{diag:equivalence}
+( 1_{A} , \beta , 1_{C} ):E \rightarrow E' 
+\end{equation} 
+the Short Five Lemma \cite[Lemma I.3.1.]{maclane} assures us that $\beta$ is an isomorphism.
+Therefore the existence of a morphism \eqref{diag:equivalence} defines an equivalence relation which we denote $E\equiv E'$.
+Define $\Ext{}_{R}(C,A)$ to be the set of congruence classes of extensions of $A$ by $C$.
+Given an extension $E$ as in \eqref{shortexactsequence} and a module homomorphism $\alpha:A\to A'$, we can construct an extension $\alpha E$ of $A'$ by $C$ and a morphism $\Gamma=(\alpha, \beta, 1_C): E \to \alpha E$ as the push out along $\alpha$.
+We can also pull back along a module homomorphism $\gamma: C' \to C$ and thereby construct an extension $E \gamma$ of $A$ by $C'$ and a morphism $\Gamma_1=(1_A,\beta_1, \gamma): E\gamma \to E$.
+The pairs $(\Gamma, \alpha E)$ and $(\Gamma_1, E \gamma)$ are unique up to congruence.
+For details on how to push out, pull back and a proof see \cite[Chapter III.1.]{maclane}.
+We denote the category of left $R$-modules by $\mathbf{M}$  and the category of abelian groups by $\mathbf {Ab}$.
+The bifunctor $\Ext{}_{R}(C,A)$ from $\mathbf {M \times M}$ to $\mathbf {Ab}$ is contravariant in its first and covariant in its second argument \cite[see Chapters III.1. and III.2.]{maclane}.
+The group operation on $\Ext{}(C,A)$ will be explained in subsection \ref{ss:addition_in_ext}.
+\begin{definition}
+Let $A$ and $C$ be modules.
+We denote their direct sum by $A \oplus C$.
+The short exact sequence
+\[
+\begin{tikzcd}
+0 \arrow{r}&
+A \arrow{r}&
+A \oplus C \arrow{r}&
+C \arrow{r}&
+0
+\end{tikzcd}
+\]
+is called direct sum extension of $A$ by $C$.
+\end{definition}
+An extension congruent to the direct sum extension is called split.
+\begin{example}\cite[Exercise 3.4.1.]{weibel}
+Let $p$ be prime and $\mathbb{Z}/p$ be the cyclic group of order $p$.
+Every extension $E$ of $\mathbb{Z}/p$ by $\mathbb{Z}/p$ is either split or congruent to a sequence of the form
+$0\to \mathbb{Z}/p\xrightarrow{\cdot p}\mathbb{Z}/{p^2}\xrightarrow{\cdot i}\mathbb{Z}/p\to 0$, for $i=1,\dotsc,p-1$.
+\end{example}
+\begin{proof}
+Let $E = (\chi, \sigma) : 0 \to \mathbb{Z}/p \to B \to \mathbb{Z}/p \to 0$ be a short exact sequence.
+Because $\frac{B}{\mathbb{Z}/p} \cong \mathbb{Z}/p$ the group $B$ must be of order $p^2$. %TODO reference
+There are two groups of order $p^2$, the cyclic group $\mathbb{Z}/{p^2}$ and the direct sum $\mathbb{Z}/p \oplus \mathbb{Z}/p$. %TODO reference
+
+If $B\cong \mathbb{Z}/p \oplus \mathbb{Z}/p$, the monomorphism $\chi$ must send the generator $s$ of $\mathbb{Z}/p$ to $(i,j)$ with $i,j\in \mathbb{Z}/p$ and not both zero.
+Suppose $i\neq 0$ then $(i,0)\mapsto s$ is a left inverse of $\chi$ and by \cite[Proposition I.4.3.]{maclane} $E$ is isomorphic to the direct sum sequence.
+
+If $B\cong \mathbb{Z}/{p^2}$, the monomorphism $\chi$ must send the generator to a multiple of $p$.
+Then $\sigma$ can send the generator of $\mathbb{Z}/{p^2}$ to any integer from $1,\dotsc,p-1$.
+Let $i$ and $j\in {1,\dots, p-1}$.
+Notice that for $E=(ip,j)$ we have a congruence
+\begin{equation*}
+\begin{tikzcd}
+E: &
+\mathbb{Z}/p 
+	\arrow{r}{\cdot ip} 
+	\arrow[equal,d]&
+\mathbb{Z}/p^2 
+	\arrow{r}{\cdot j} 
+	\arrow{d}{\cdot i^{-1}}&
+\mathbb{Z}/p 
+	\arrow[d,equal]
+\\
+E': &
+\mathbb{Z}/p 
+	\arrow{r}{\cdot p}&
+\mathbb{Z}/p^2 
+	\arrow{r}{\cdot ij}&
+\mathbb{Z}/p
+\end{tikzcd}
+\end{equation*}
+to $E' = (p,ij) = (p, ij \bmod p)$.
+And two extensions $(p,i')$ and $(p,j')$ are congruent only if $i' = j'$.
+\end{proof}
+\begin{lemma}
+Let $E$ be as in \eqref{shortexactsequence}.
+Then $\chi E$ and $E \sigma$ are split extensions.
+\end{lemma}
+\begin{proof}
+By uniqueness of $\chi E$ and $E\sigma$ up to congruence it is enough to push out and pull back the sequence $E$ to split extensions.
+Let $\iota, \iota'$ denote inclusions into the first and $\rho, \rho'$ projections onto the second factor.
+The diagrams
+\begin{equation*}
+\begin{tikzcd}
+A \arrow{r}{\chi} \arrow{d}{\chi}&
+B \arrow{r}{\sigma} \arrow{d}{(1_B,\sigma)}&
+C \arrow[d,equal]
+\\
+B \arrow{r}{\iota} &
+B \oplus C \arrow{r}{\rho} &
+C
+\end{tikzcd}
+\quad \text{and} \quad
+\begin{tikzcd}
+A \arrow{r}{\iota'} \arrow[d,equal]&
+A\oplus B \arrow{r}{\rho'} \arrow{d}{\chi + 1_B}&
+B \arrow{d}{\sigma}
+\\
+A \arrow{r}{\chi} &
+B \arrow{r}{\sigma} &
+C 
+\end{tikzcd}
+\end{equation*}
+are commutative.
+\end{proof}
+%\begin{lemma} %only needed for naturality of E_*
+%\label{lemma:alphaEequivEgamma}
+%Let $\Gamma$ be of the form \eqref{diag:equivalence}.
+%Then $\alpha E \equiv E' \gamma$.
+%\end{lemma}
+%\begin{proof}
+%See \cite[Proposition III.1.8.]{maclane}.
+%\end{proof}
+\subsection{Ext$^\text{n}$} 
+%EXTENSION
+Fix a positive integer $n$.
+We call an exact sequence of modules
+\begin{equation}
+\label{nfoldextension}
+S = (\chi, \lambda_{n-1}, \dots, \lambda_1, \sigma) : 0 \rightarrow A \rightarrow B_{n-1} \rightarrow \dots  \rightarrow B_0 \rightarrow C \rightarrow 0
+\end{equation}
+an $n$-fold extension of $A$ by $C$.
+Let $S$ and $S'$ be $n$-fold extensions.
+%MORPHISM
+A morphism $\Gamma:S\rightarrow S'$ is a tuple of $n+2$ module homomorphisms $(\alpha,\beta_{n-1}...,\beta_{0},\gamma)$ such that the diagram
+\[\begin{tikzcd}
+S: \arrow{d} & 
+%0 \arrow{r} & 
+A \arrow{r} \arrow{d}{\alpha} &
+B_{n-1} \arrow{r}\arrow{d}{\beta_{n-1}} & 
+\dots \arrow{r} & 
+%B_1 \arrow{r}\arrow{d} & 
+B_0 \arrow{r} \arrow{d}{\beta_0}& 
+C %\arrow{r} 
+\arrow{d}{\gamma} 
+%& 0 
+\\
+S': & 
+%0 \arrow{r} & 
+A' \arrow{r} & 
+B_{n-1}' \arrow{r} & 
+\dots \arrow{r} &
+%B_1'\arrow{r} & 
+B_0' \arrow{r} & 
+C' %\arrow{r} & 
+%0
+\end{tikzcd}\]
+commutes.
+%CONGRUENCE
+Let $S$ ad $S'$ be two $n$-fold extensions of $A$ by $C$.
+We say $S$ is congruent to $S'$ if there is a positive integer $k$, modules $S_0,S_1 \dots,S_{2k}$ with $S=S_0$ and $S_{2k}=S'$ and morphisms
+\begin{equation*}
+%\label{nfoldcongruence}
+S_0 \to S_1 \leftarrow S_2 \to S_3 \leftarrow \dots \to S_{2k-1} \leftarrow S_{2k}
+\end{equation*}
+all starting in $1_A$ and ending in $1_C$.
+This defines an equivalence relation on the set of all $n$-fold extensions of $A$ by $C$.
+Notice that the definition for congruence on $\Ext{}_{R}$ agrees with the one defined here for $n=1$.
+%EXT^n
+Let $\Ext{n}_{R}(C,A)$ denote the set of congruence classes of $n$-fold extensions of $A$ by $C$.
+When the ring is clear we write $\Ext{n}(C,A)$.
+A congruence class $\sigma\in\Ext{n}(C,A)$ consists of $n$-fold extensions of $A$ by $C$.
+If we are not interested in the congruence class of an extension, we use the notation $S \in\in \Ext{n}(C,A)$ for an element $S\in\sigma\in \Ext{n}(C,A)$.
+\subsubsection{Splicing and Factorizing}
+%%%
+%%% Splicing
+%%%
+Given exact sequences
+\begin{gather*}
+S :0 \to A \to B_{n-1}\to \dots\to B_0 \xrightarrow{\sigma} K \to 0
+\\
+S': 0 \to K \xrightarrow{\chi} B'_{m-1}\to \dots \to B'_0 \to C \to 0
+\end{gather*}
+we assign to them an exact sequence $S \circ S'$ defined as
+\begin{equation*} 
+\label{diag:factorize} 
+0 \to A \to \dots \to B_0 \xrightarrow{\lambda} B'_{m-1} \to \dots \to C \to 0
+\end{equation*}
+where $\lambda := \chi\sigma$.
+This process is called splicing and $S\circ S'$ is called the Yoneda composite of $S$ and $S'$.
+Furthermore any exact sequence can be factorized into short exact sequences.
+%%%
+%%% FACTORIZATION
+%%%
+Let $S$ be as in \eqref{nfoldextension}.
+Let $\rho$ be the restriction of $B_{n-1}\to B_{n-2}$ onto its image and $\iota: \ker(B_{n-2} \to B_{n-3}) \to B_{n-2}$ the inclusion.
+Then $S =: S_n = E_n \circ S_{n-1}$ where
+\begin{gather*}
+E_n : 0 \to A \to B_{n-1} \xrightarrow{\rho}\Image(B_{n-1}\to B_{n-2}) \to 0 
+\\
+S_{n-1} : 0 \to {\ker(B_{n-2} \to B_{n-3})} \xrightarrow{\iota}B_{n-2} \to \dots \to B_0 \to C \to 0
+\end{gather*}
+are both exact.
+Iterating this process for $S_{n-1}$ and so on gives us a factorization of $S$ into short exact sequences $S=E_n \circ \dots \circ E_1$ where $E_1 := S_1$.
+\subsubsection{Ext$^{\text{n}}$ as Bifunctor}
+\label{ss:extnasbifunctor}
+Let $S$ be as in \eqref{nfoldextension} with factorization $S=E_n 
+\circ \dots \circ E_1$.
+Let $\alpha: A\to A'$ and $\gamma: C' \to C$ be module homomorphisms.
+We assign extensions $\alpha S := (\alpha E_n) \circ \dots \circ E_1$ of $A'$ by $C$ and $S\gamma := E_n \circ \dots \circ (E_1 \gamma)$ of $A$ by $C'$.
+By this definition we get morphisms $\Gamma: S\to \alpha S$ and $\Gamma_1: S\gamma \to S $.\footnote{Pulling back and pushing out gives morphisms between the short exact sequences as mentioned in subsection \ref{ss:ext1}. Use the identity everywhere else.}
+%BIFUNCTOR
+The bifunctor $\Ext{n}_{R}(C,A): \mathbf{M \times M} \to \mathbf {Ab}$ is contravariant in its first and covariant in its second argument \cite[p. 85]{maclane}.
+The group operation is presented in the succeeding subsection.
+
+We will later need
+\begin{lemma}
+\label{lemma:morphisminducescongruence_n}
+Every morphism $\Gamma = (\alpha,\dots,\gamma) : S \to S'$ between two $n$-fold extensions $S$ and $S'$ yields a congruence $\alpha S \equiv S' \gamma$.
+\end{lemma}
+\begin{proof}
+See \cite[Proposition III.5.1.]{maclane}.
+\end{proof}
+\subsubsection{Addition in Ext$^\text{n}$}
+\label{ss:addition_in_ext}
+We will sketch how to define an addition on $\Ext{n}_{R}$.
+Define the diagonal
+%\begin{equation*}
+$\Delta:  C \to C \oplus C \quad \text{by} \quad c \mapsto (c,c)$
+%\end{equation*}
+and the codiagonal
+%\begin{equation*}
+$\nabla: A \oplus A \to A \quad \text{by} \quad (a,a_1) \mapsto a + a_1$.
+%\end{equation*}
+Given two $n$-fold extensions $S,S'$ of $A$ by $C$ we define $S \oplus S'$ to be the component wise direct sum of their modules and homomorphisms.
+The resulting sequence is exact, starts in $A \oplus A$ and ends in $C \oplus C$.
+We define $S + S'$ by $\nabla (S \oplus S') \Delta$.
+Note that $(\nabla (S \oplus S')) \Delta = \nabla ((S \oplus S') \Delta)$ so we can omit the parentheses.
+The element $S+S'$ is called the Baer sum of $S$ and $S'$.
+Together with this operation $\Ext{n}_{R}(C,A)$ is an abelian group \cite[p. 85]{maclane}.
+The congruence class of the sequence 
+\begin{equation}
+\label{nfoldsplitextension}
+S_0 = (1_A,0,\dots,0,1_C): 0\to A\to A \to 0 \to \dots \to 0 \to C \to C \to 0
+\end{equation} 
+is the zero element of $\Ext{n}_{R}(C,A)$ under the Baer sum.
+Let $\alpha: A \to A'$, $\gamma: C' \to C$ be homomorphisms and $S,S' \in \in \Ext{n}_{R}(C,A)$.
+The Baer sum is distributive \cite[see Theorem 5.3.]{maclane}.
+That is:
+\begin{equation*}
+\alpha (S + S') \equiv \alpha S + \alpha S', \quad
+(S + S')\gamma \equiv S\gamma + S' \gamma
+\end{equation*}
+We will later need
+\begin{lemma}
+\label{lemma:nfoldcomposite}
+If $S$ is as in \eqref{nfoldextension}, the composite extensions $\chi S$ and $S \sigma$ are congruent to the zero element $S_0$ as defined in \eqref{nfoldsplitextension}.
+\end{lemma}
+\begin{proof}
+Consider the morphisms $S \to \chi S \to S_0$ in the following diagram
+\begin{equation*}
+\begin{tikzcd}
+A \arrow{r}{\chi} \arrow{d}{\chi} &
+B_{n-1} \arrow{r}{\lambda_{n-1}}\arrow{d}{(1,\lambda_{n-1})} &
+B_{n-2} \arrow{r}\arrow[d,equal] &
+\dots \arrow{r} & 
+%B_1 \arrow{r}\arrow[d,equal] & 
+B_0 \arrow{r} \arrow[d,equal]& 
+C  \arrow[d,equal]
+\\ 
+B_{n-1} \arrow{r} \arrow[d, equal] &
+B_{n-1} \oplus \lambda_{n-1} B_{n-1} \arrow{r}{\rho_2}\arrow{d}{\rho_1} &
+B_{n-2} \arrow{r}\arrow{d} &
+\dots \arrow{r} & 
+%B_1 \arrow{r}\arrow{d} & 
+B_0 \arrow{r} \arrow{d}& 
+C  \arrow[d,equal]
+\\
+B_{n-1} \arrow{r}{1} & 
+B_{n-1} \arrow{r} & 
+0 \arrow{r} &
+\dots \arrow{r} &
+%0 \arrow{r} & 
+C \arrow{r}{1} & 
+C 
+\end{tikzcd}
+\end{equation*}
+where $\rho_1$ is the projection onto the first and $\rho_2$ the projection onto the second factor.
+This shows that $\chi S \equiv S_0$.
+One proves $S\sigma \equiv S_0$ via construction of morphisms $S_0 \leftarrow S\sigma \to S$ in a similar fashion.
+\end{proof}
+\input{s_1_resol}
+\input{s_1_long}

@@ -1,0 +1,164 @@
+\subsection{Factor Sets} 
+\label{ss:factorsets}
+From here on we identify $A$ with $\chi A \subset B$.
+For an extension $E$ as in \eqref{diag:groupextension} we choose a set function
+$u:\Pi \to B$ such that $\sigma u = 1_{\Pi}$ and $u(1)=0$.
+We call $u$ representatives.
+Notice that $\sigma$ being onto ensure the existence of representatives.
+We use the notation $xa:=\phi(x)a$.
+The equation \eqref{eq:operatorsphi} with $b=u(x)$ then becomes
+\begin{equation}
+\label{eq:representatives_and_A}
+u(x) + a = xa + u(x).
+\end{equation}
+Since $A = \ker\sigma$ we conclude that each coset $b + A$ in $B$ contains exactly one $u(x)$.
+For suppose $u(x) = u(x') + a$ then $x = \sigma u (x) = \sigma (u(x')+ a) = \sigma u(x') + \sigma(a) = x'$.
+
+Because $\sigma u (xy) = xy = \sigma u(x) \sigma u(y) = \sigma (u(x)+u(y))$ there exist unique elements $f(x,y)\in A$ such that $u(x) + u(y) = f(x,y) + u(xy)$.
+Call $f$ a factor set of the extension $E$.
+
+The described procedure of assigning a factor set to a given group extension will be used in Theorem \ref{thm:opext}.
+
+The addition in $B$ is determined by $u$ and $f$ in the following way:
+Every element in $B$ can be written uniquely as $a + u(x)$ for $a\in A$ and $x \in \Pi$.
+For elements $a + u(x)$ and $a_1 + u(y)$ in $B$ we calculate their sum
+\begin{equation*}
+(a + u(x)) + (a_1 + u(y)) = a + x a_1 + u(x) + u(y) = a + x a_1 + f(x,y) + u(xy)
+\end{equation*}
+by using \eqref{eq:representatives_and_A} and the definition of $f$.
+
+%%
+%%Lemma needed for the main Theoremof this section
+%%
+
+
+
+\subsection{Opext and the 2-dimensional Cohomology Group}
+\label{ss:opext}
+We define $Z^2_\phi (\Pi,A)$ to be the set of functions $f:\Pi \times \Pi \to A$ such that the conditions
+\begin{equation}
+\label{eq:normalization}
+f(x,1) = 0 = f(1,y)
+\end{equation}
+\begin{equation}
+\label{eq:factorsetequality}
+xf(y,z)+f(x,yz) = f(x,y) + f(xy,z)
+\end{equation}
+are satisfied for all $x,y,z\in \Pi$.
+Denote by $B^2_\phi (\Pi,A)$ the subset of $Z^2_\phi (\Pi,A)$ containing all functions $\delta g$ of the form 
+\begin{equation}
+\label{eq:deltag}
+\delta g (x,y) := xg(y)-g(xy)+g(x)
+\end{equation}
+for some function $g:\Pi \to A$ with $g(1)=0$.
+We define an operation $(f + f') (x,y)= f(x,y) + f'(x,y)$.
+Together with this operation $Z^2_\phi (\Pi,A)$ is an abelian group with $B^2_\phi (\Pi,A)$ being a subgroup. %abelian group => subgroups are normal
+\begin{definition}
+We define the 2-dimensional cohomology group as the quotient 
+\[
+H^2_\phi (\Pi,A) = Z^2_\phi (\Pi,A) / B^2_\phi (\Pi,A).
+\]
+\end{definition}
+\begin{lemma}
+Factor sets satisfy conditions \eqref{eq:normalization} and \eqref{eq:factorsetequality}.
+\end{lemma}
+\begin{proof}
+It is easy to see that the equation \eqref{eq:normalization} holds for factor sets.
+Let $f$ be a factor set of the extension $A\to B \to \Pi$.
+Using the addition described in subsection \ref{ss:factorsets} we calculate
+\begin{align*}
+\text{1.\;}(u(x)+  u(y)) + u(z)  &= (f(x,y)+u(xy))+u(z) \\&= f(xy) + f(xy,z) + u(xyz) \\
+\text{2.\;} u(x)+ (u(y)  + u(z)) &= u(x)+(f(y,z) + u(yz)) \\&= xf(y,z) + f(x,yz) + u(xyz)
+\end{align*}
+Since addition in $A$ is associative 1 and 2 are equal.
+So equation \eqref{eq:factorsetequality} is satisfied.
+\end{proof}
+When we assigned factor sets to group extensions it involved a choice of representatives.
+To prove Theorem \eqref{thm:opext} we will need
+\begin{lemma}
+\label{lemma:factorsetwelldefined}
+The factor set of a group extension of $A$ by $\Pi$ with operators $\phi$ is well defined modulo $B_\phi^2(\Pi,A)$.
+\end{lemma}
+\begin{proof}
+Let $u,u':\Pi\to B$ be representatives.
+By definition $\sigma u (x)= \sigma u' (x) = x$ for all $x\in\Pi$.
+Therefore $u(x)$ and $u'(x)$ lie in the same coset of $A$ in $B$ and for all $x\in\Pi$ we can choose some set function
+$g: \Pi \to A$ such that
+$u'(x) = g(x) + u(x)$.
+Using \eqref{eq:representatives_and_A} we get
+\begin{align*}
+u'(x) + u'(y) 
+&= g(x)+u(x)+g(y)+u(y) \\
+&= g(x)+xg(y)+u(x)+u(y) \\
+&= g(x)+xg(y)+f(x,y)+u(xy) \\  
+&= g(x)+xg(y)+f(x,y)-g(xy)+u'(xy) \\
+&= xg(y)-g(xy)+g(x)+f(x,y)+u'(xy) \\
+&= \delta g (x,y) +f(x,y)+u'(xy)
+\end{align*}
+where $f$ is the factor set for representatives $u$ and $\delta g$ as defined in \eqref{eq:deltag}.
+So we can define the new factor set as
+\[
+f'(x,y) = \delta g (x,y) +f(x,y)
+\]
+with $\delta g\in B_\phi^2$.
+\end{proof}
+\begin{theorem}
+\label{thm:opext}
+Assigning a factor set to a congruence class of group extensions yields a bijection
+\[\omega: \Opext(\Pi,A,\phi) \to H^2_\phi(\Pi,A)\]
+modulo $B^2_\phi(\Pi,A)$.
+\end{theorem}
+\begin{proof}
+Given a congruence class $\tau\in \Opext(\Pi,A,\phi)$ choose a representative $E\in \tau$.
+Now construct a factor set as described in subsection \ref{ss:factorsets}.
+Define $\omega \tau := f+B^2_\phi(\Pi,A)$.
+%well defined
+It is easy to see that congruent extensions have the same factor sets.
+Together with Lemma \ref{lemma:factorsetwelldefined}, this shows that $\omega$ is well defined.
+
+%injective
+To show that it is injective, let $E:A\to B \to \Pi$ and $E':A\to B' \to \Pi$ be two group extensions.
+Choose representatives $u$ and $u'$ with factor sets $f$ and $f'$.
+Assume $f' - f = \delta g$ for some set function $g: \Pi \to A$ satisfying $g(1)=0$.
+Choosing representatives $g(x) + u'(x)$ for $E'$ shows that $f$ is factor set for $E'$.
+As representatives and factor set determine the addition of $B$ and $B'$, the extensions are congruent.
+
+%surjective
+Lemma \ref{lemma:factorsetsareonto} shows surjectivity.
+\end{proof}
+\begin{lemma}
+\label{lemma:factorsetsareonto}
+Every $f\in Z_\phi^2$ is factor set of some group extension $E$.
+\end{lemma}
+\begin{proof}
+Define $B:=A\times\Pi$.
+The operation 
+\[
+(a,x)+(a_1,y) := (a+x a_1+f(x,y),xy)
+\]
+defined for elements $(a,x), (a_1,y)\in B$ induces a group structure on $B$.
+Associativity is shown by
+\begin{align*}
+((a,x)+(a_1,y))+(a_2,z) 
+&= (a+x a_1+f(x,y),xy) + (a_2,z)\\
+&= (a+x a_1+f(x,y) + xya_2 + f(xy,z),xyz)\\
+&=(a+x(a_1+y a_2+f(y,z))+f(x,yz),xyz) \\
+&=(a,x)+(a_1+y a_2+f(y,z),yz)\\
+&=(a,x)+((a_1,y)+(a_2,z)).
+\end{align*}
+The third equation holds because of \eqref{eq:factorsetequality}.
+The short exact sequence $(\chi,\sigma): A\to B\to\Pi$ with $\chi$ inclusion and $\sigma$ projection has representatives $u(x)=(0,x)$ and factor set $f$.
+\end{proof}
+
+%define semi-direct product
+Let $A$ be a $\Pi$-module.
+The semi-direct product $A\times_\phi \Pi$ is defined as the set $A\times\Pi$ together with the addition
+\[
+(a,x)+(a_1,y) := (a + x a_1, x y) 
+\]
+for $(a,x), (a_1,y) \in A\times \Pi$.
+The neutral element is $(0,1)$ and the inverse of an element $(a,x)$ is given by $-(a,x):=(x^{-1}(-a),x^{-1})$.
+Let $\iota:A \to A \times_\phi \Pi$ denote the inclusion and $\rho:A \times_\phi \Pi \to \Pi$ the projection.
+An extension that is congruent to $(\iota, \rho)$ is called semi-direct product extension.
+
+The proof of Lemma \ref{lemma:factorsetsareonto} shows that the image of the zero element of $H_\phi^2(\Pi,A)$ is the semi-direct product extension.

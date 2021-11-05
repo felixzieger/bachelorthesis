@@ -1,0 +1,45 @@
+\ProvidesPackage{mystyle}
+
+%%% packages
+\usepackage[german,english]{babel}
+\usepackage{BA_Titelseite}
+\usepackage{mathtools}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[backend=biber, style=alphabetic]{biblatex}
+\usepackage{csquotes}
+
+%%% bibliography
+\addbibresource{bib.bib}
+
+%%% newtheorems
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{application}{Application}
+\newtheorem{example}{Example}
+
+%%% newcommands
+\newcommand{\Ext}[1]{\operatorname{Ext}^{#1}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\bdd}[1]{\operatorname{\partial}_{#1}}
+\newcommand{\cls}{\operatorname{cls}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Opext}{\operatorname{Opext}}
+\newcommand{\Image}{\operatorname{im}}
+
+%%% Titelseitenhelfer
+\author{Felix Ingbert Zieger}
+\geburtsdatum{26. Juli 1995}
+\geburtsort{Aschaffenburg}
+%Datum der Abgabe der Arbeit
+\date{15. Februar 2018}
+\betreuer{Betreuer: Dr. Irakli Patchkoria}
+\zweitgutachter{Zweitgutachter: Prof. Dr. Carl-Friedrich Bödigheimer}
+%z.B.: Mathematisches Institut
+\institut{Mathematisches Institut}
+\title{Extensions and Cohomology of Groups}
+%Do not change!
+\ausarbeitungstyp{Bachelorarbeit Mathematik}
